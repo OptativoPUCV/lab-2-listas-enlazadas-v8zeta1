@@ -100,7 +100,7 @@ void * popBack(List * list) {
 
 void* popCurrent(List* list) {
     if (list->current == NULL) {
-        return;
+        return NULL;
     }
     void* dato1 = list->current->data;
     Node* izq = list->current->prev;
