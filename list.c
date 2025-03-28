@@ -99,7 +99,7 @@ void * popBack(List * list) {
 }
 
 void* popCurrent(List* list) {
-    if (list->current == NULL) {
+    if (list == NULL ||list->current == NULL) {
         return NULL;
     }
     void* dato1 = list->current->data;
@@ -108,11 +108,17 @@ void* popCurrent(List* list) {
     // Ajustamos los punteros de los nodos vecinos
     if (izq != NULL) {
         izq->next = der;
-    } else {
+    } 
+    else {
         list->head = der;  // Si el nodo actual es el primero, actualizamos la cabeza
     }
     if (der != NULL) {
         der->prev = izq;
+        list->current = list->tail;
+    }
+    if(list->head == NULL) {
+        list->tail = NULL;
+        list->current = NULL;
     }
     free(list->current);  // Liberar la memoria del nodo eliminado
     return dato1;
