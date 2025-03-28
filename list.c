@@ -30,6 +30,7 @@ Node * createNode(void * data) {
 
 List * createList() {
     List* list = (List*) malloc (sizeof(List));
+    if(list == NULL) return NULL;
     list->head = NULL;
     list->tail = NULL;
     list->current = NULL;
@@ -85,6 +86,9 @@ void pushCurrent(List * list, void * data) {
     if(list->current->next != NULL) {
         list->current->next->prev = newNode;
     }
+    else {
+        list->tail = newNode;
+    }
     list->current->next = newNode;
 }
 
@@ -105,12 +109,11 @@ void* popCurrent(List* list) {
     void* dato1 = list->current->data;
     Node* izq = list->current->prev;
     Node* der = list->current->next;
-    // Ajustamos los punteros de los nodos vecinos
     if (izq != NULL) {
         izq->next = der;
     } 
     else {
-        list->head = der;  // Si el nodo actual es el primero, actualizamos la cabeza
+        list->head = der;
     }
     if (der != NULL) {
         der->prev = izq;
@@ -124,7 +127,7 @@ void* popCurrent(List* list) {
         list->tail = NULL;
         list->current = NULL;
     }
-    free(list->current);  // Liberar la memoria del nodo eliminado
+    free(list->current);
     return dato1;
 }
 
