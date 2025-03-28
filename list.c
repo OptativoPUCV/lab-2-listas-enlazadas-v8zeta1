@@ -98,7 +98,24 @@ void * popBack(List * list) {
     return popCurrent(list);
 }
 
-void * popCurrent(List * list) {
+void* popCurrent(List* list) {
+    if (list->current == NULL) {
+        return;
+    }
+    void* dato1 = list->current->data;
+    Node* izq = list->current->prev;
+    Node* der = list->current->next;
+    // Ajustamos los punteros de los nodos vecinos
+    if (izq != NULL) {
+        izq->next = der;
+    } else {
+        list->head = der;  // Si el nodo actual es el primero, actualizamos la cabeza
+    }
+    if (der != NULL) {
+        der->prev = izq;
+    }
+    free(list->current);  // Liberar la memoria del nodo eliminado
+    return dato1;
 }
 
 void cleanList(List * list) {
