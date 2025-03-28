@@ -82,3 +82,12 @@ list.c:102:1: error: control reaches end of non-void function [-Werror=return-ty
 cc1.exe: all warnings being treated as errors
 Compilation failed
 d02f03f
+Fri, Mar 28, 2025  7:43:58 PM: 
+In file included from test.c:5:0:
+list.c: In function 'popCurrent':
+list.c:102:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+cc1.exe: all warnings being treated as errors
+Compilation failed
+1531943
